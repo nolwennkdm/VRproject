@@ -1,3 +1,5 @@
 *.dylib
-VR_Projet/Library/
-VR_Projet/Library/ArtifactDB
+
+VR_Project/Library/
+VR_Project\Library\
+VR_Project/Library/ArtifactDB

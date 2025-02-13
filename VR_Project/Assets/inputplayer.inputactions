@@ -1,0 +1,34 @@
+{
+    "name": "inputplayer",
+    "maps": [
+        {
+            "name": "New action map",
+            "id": "250d33a2-8477-441d-9eaf-9f2b477d0b5f",
+            "actions": [
+                {
+                    "name": "MoveButton",
+                    "type": "Button",
+                    "id": "a4f44d83-3bc1-4a97-875b-4b863f05810b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "117351d8-49ca-44b2-96ec-dcf6e95c7d12",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
