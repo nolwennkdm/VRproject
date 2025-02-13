@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\HammerGrab.cs" />
     <Compile Include="Assets\Scripts\BreakGlass.cs" />
     <Compile Include="Assets\Scripts\DoorHandle.cs" />
+    <Compile Include="Assets\Scripts\DoorGrabbable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Stylized Ocean Materials\Shader\Water_Ocean_01.shader" />
