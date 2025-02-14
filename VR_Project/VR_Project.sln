@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.XR.Interaction.Toolki
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor", "Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.csproj", "{89C1247E-C91D-4BF4-D662-AD4AA29C82F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{AE9968F1-A971-CD48-AA82-37EB29883028}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{89C1247E-C91D-4BF4-D662-AD4AA29C82F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89C1247E-C91D-4BF4-D662-AD4AA29C82F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89C1247E-C91D-4BF4-D662-AD4AA29C82F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE9968F1-A971-CD48-AA82-37EB29883028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE9968F1-A971-CD48-AA82-37EB29883028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE9968F1-A971-CD48-AA82-37EB29883028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE9968F1-A971-CD48-AA82-37EB29883028}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
