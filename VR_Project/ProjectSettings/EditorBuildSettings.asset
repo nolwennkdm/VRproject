@@ -5,12 +5,39 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/SceneDeBase.unity
+    guid: e399c558485e20741b524c9c4306bbbe
+  - enabled: 1
     path: Assets/Scenes/Anom7.unity
     guid: 13491cb37c33ef1458313df1d045f9b5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestDoor 1.unity
     guid: 6b6383c984ee7214684da735d7ed7639
+  - enabled: 1
+    path: Assets/Scenes/Anom1.unity
+    guid: b1019757b7bbea347bc74f364c03437b
+  - enabled: 1
+    path: Assets/Scenes/Anom2.unity
+    guid: 2e7f131678d7d4b458cc199708c9c501
+  - enabled: 1
+    path: Assets/Scenes/Anom3.unity
+    guid: 3cdee1c00a9f03f4dbb6fc2c26f0b651
+  - enabled: 1
+    path: Assets/Scenes/Anom4.unity
+    guid: da21d299677258343ba244a9477ab320
+  - enabled: 1
+    path: Assets/Scenes/Anom5.unity
+    guid: c84b54a142cc79b4ab76d71477963d5b
+  - enabled: 1
+    path: Assets/Scenes/Anom6.unity
+    guid: 83d139b9b03e861489c7121f1262d9ff
+  - enabled: 1
+    path: Assets/Scenes/Anom8.unity
+    guid: a328329491506394590054e0c5cdfe8c
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: d47d2e71a4dddab4cb70e496e9504f41
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 829e3ef81cc4eea459be2fd3cb539850, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 609a23afee46bb84288ec8fc05572281, type: 2}

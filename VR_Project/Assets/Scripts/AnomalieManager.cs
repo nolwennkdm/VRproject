@@ -6,22 +6,19 @@ public class AnomalieManager : MonoBehaviour
     public int erreursMax = 7; // Nombre de réussites nécessaires
     private int succesActuels = 0; // Nombre de succès consécutifs
     private string sceneBase = "SceneDeBase"; // Nom de la scène de base
-    /// Vecteur pour la position fixe du joueur lors du changement de scène 
-    private Vector3 fixedSpawnPosition = new Vector3(-1.88f, 1.47f, 37.39f); 
-    
-// Rotation fixe (0, 0, 0) 
+    private Vector3 fixedSpawnPosition = new Vector3(-1.88f, 1.47f, 37.39f);
     private Quaternion fixedRotation = Quaternion.Euler(0f, 0f, 0f);
+    private Transform originalParent; // Référence au parent original
 
     void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        // Optionnel: Charger l'état de l'anomalie sauvegardé précédemment
-        // anomalieActive = PlayerPrefs.GetInt("AnomalieActive", 0) == 1;
     }
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject); // Garde cet objet même après un changement de scène
+        // Conserver la référence au parent original
+        originalParent = transform.parent;
 
         // Empêcher la duplication de l'objet
         if (FindObjectsOfType<AnomalieManager>().Length > 1)
@@ -30,16 +27,34 @@ public class AnomalieManager : MonoBehaviour
             return;
         }
     }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) { 
-        // Réinitialiser la position et la rotation de XR Origin directement (car le script est attaché à XR Origin) 
-        transform.position = fixedSpawnPosition; 
-        transform.rotation = fixedRotation; 
-        // Réinitialiser la position et la rotation de tous les enfants (y compris les sous-enfants)
-       } 
-        // Fonction récursive pour réinitialiser la position et la rotation de tous les enfants et sous-enfants private 
-   
 
-    // Méthode appelée quand le joueur entre dans un trigger
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("Scene loaded: " + scene.name);
+        Debug.Log("AnomalieManager is active: " + gameObject.activeSelf);
+
+        // Réinitialiser la position et la rotation de XR Origin directement (car le script est attaché à XR Origin)
+        transform.position = fixedSpawnPosition;
+        transform.rotation = fixedRotation;
+
+        // Réattacher l'objet à son parent original si possible
+        if (originalParent != null)
+        {
+            transform.SetParent(originalParent);
+        }
+        else
+        {
+            // Si le parent original n'existe plus, trouver un nouveau parent (par exemple, le joueur)
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                transform.SetParent(player.transform);
+            }
+        }
+
+        // Réinitialiser la position et la rotation de tous les enfants (y compris les sous-enfants)
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collision détectée avec : " + other.gameObject.name);
@@ -80,38 +95,47 @@ public class AnomalieManager : MonoBehaviour
         }
     }
 
-    // Réinitialise le jeu en cas de mauvais choix
-    void Recommencer()
+    public void Recommencer()
     {
         succesActuels = 0;
+
+        // Détacher l'objet de son parent avant de recharger la scène
+        transform.SetParent(null);
+        DontDestroyOnLoad(gameObject);
+
         // Recharger la scène de base
         SceneManager.LoadScene(sceneBase);
     }
 
-    // Gagner le jeu si on atteint le nombre d'essais maximum
     void GagnerLeJeu()
     {
         Debug.Log("Félicitations ! Vous avez gagné après " + erreursMax + " succès d'affilée !");
-        // Optionnellement, charger une scène de victoire
-        // SceneManager.LoadScene("SceneDeVictoire");
+        
+        SceneManager.LoadScene("Win");
     }
 
-    // Lance la scène suivante avec une probabilité pour activer l'anomalie
     void LancerSceneSuivante()
     {
         float probabilité = Random.Range(0f, 1f);
 
+        // Détacher l'objet de son parent avant de charger la nouvelle scène
+        transform.SetParent(null);
+        DontDestroyOnLoad(gameObject);
+
         // 10% de chance de rester en mode normal, 90% de chance d'entrer en anomalie
-        if (probabilité < 0.001f)
+        if (probabilité < 0.25f)
         {
             SceneManager.LoadScene(sceneBase);
         }
         else
         {
-            int anomalieNum = Random.Range(1, 5); // Générer un nombre entre 1 et 4
-            SceneManager.LoadScene("Anom4");
+            int anomalieNum = Random.Range(1, 9); // Générer un nombre entre 1 et 8
+            SceneManager.LoadScene("Anom"+anomalieNum);
         }
     }
-    void OnDestroy() { // Se désabonner de l'événement lors de la destruction de l'objet 
-        SceneManager.sceneLoaded -= OnSceneLoaded; }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 }

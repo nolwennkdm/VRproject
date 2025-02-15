@@ -33,7 +33,7 @@ public class DirectionalFireSpread : MonoBehaviour
                 collider.isTrigger = true; // Si on veut détecter le joueur sans collision physique
             }
 
-            newFire.AddComponent<FireTrigger>(); // Ajoute la détection du joueur
+             // Ajoute la détection du joueur
 
             yield return new WaitForSeconds(spreadInterval);
             elapsedTime += spreadInterval;

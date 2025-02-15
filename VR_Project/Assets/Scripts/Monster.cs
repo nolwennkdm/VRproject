@@ -9,17 +9,25 @@ public class Monster : MonoBehaviour
     public float crawlSpeed = 2f;
     public float attackDistance = 1f;
     public float attackCooldown = 5f;
-    public GameObject bloodEffectPrefab; // Effet de sang
+    public ParticleSystem ps; // Effet de sang
 
     private Rigidbody rb;
     private Animator anim;
     private bool isCrawling = false;
     private bool canAttack = true;
+    private AudioSource audioSource;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        
+
+        if (audioSource == null)
+        {
+            Debug.LogError("No AudioSource found on " + gameObject.name);
+        }
     }
 
     void Update()
@@ -28,6 +36,11 @@ public class Monster : MonoBehaviour
         if (breakableObject == null && !isCrawling)
         {
             Jump(); // Déclenche le saut
+            if (!audioSource.isPlaying) // Prevent restarting if already playing
+            {
+                audioSource.Play();
+                // Notify all listeners
+            }
         }
 
         if (isCrawling)
@@ -72,13 +85,12 @@ public class Monster : MonoBehaviour
         anim.SetTrigger("bite");
 
         // Déclencher l'effet de sang sur le joueur (optionnel)
-        if (bloodEffectPrefab)
-        {
-            Instantiate(bloodEffectPrefab, player.position, Quaternion.identity);
-        }
+        
 
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
+        AnomalieManager anomalieManager = FindObjectOfType<AnomalieManager>();
+        anomalieManager.Recommencer();
     }
 
     // Quand le marteau touche le monstre, afficher du sang
@@ -86,9 +98,9 @@ public class Monster : MonoBehaviour
     {
         if (other.CompareTag("Hammer"))
         {
-            if (bloodEffectPrefab)
+            if (ps)
             {
-                Instantiate(bloodEffectPrefab, transform.position, Quaternion.identity);
+                ps.Play();
             }
             anim.SetTrigger("dead");
         }
